@@ -46,6 +46,7 @@
   },
   "mounts": [
     "type=volume,target=/var/lib/docker",
-    "type=volume,target=/mnt/supervisor"
+    "type=volume,target=/mnt/supervisor",
+    "source=C:/Users/tomn-/Desktop/Programmieren/Repo/test,target=/workspace,type=bind"
   ]
 }
