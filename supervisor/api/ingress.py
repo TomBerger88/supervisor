@@ -154,7 +154,7 @@ class APIIngress(CoreSysAttributes):
 
         # Process requests
         addon = self._extract_addon(request)
-        path = request.match_info["path"]
+        path = request.match_info.get("path", "")
         session_data = self.sys_ingress.get_session_data(session)
         try:
             # Websocket
@@ -279,7 +279,7 @@ class APIIngress(CoreSysAttributes):
             try:
                 response.headers["X-Accel-Buffering"] = "no"
                 await response.prepare(request)
-                async for data in result.content.iter_chunked(4096):
+                async for data, _ in result.content.iter_chunks():
                     await response.write(data)
 
             except (
